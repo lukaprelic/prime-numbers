@@ -1,6 +1,5 @@
-package com.natwest.simplespring.service;
+package com.natwest.service;
 
-import com.natwest.service.PrimeCalculatorService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,16 +12,16 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class PrimeCalculatorServiceTest {
+public class PrimeCalculatorServiceTest {
 
     private PrimeCalculatorService primeCalculatorService;
-    public static final List<Integer> expectedPrimeNumbers = List.of(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97);
+    public static final List<Integer> expectedPrimeNumbers =
+            List.of(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97);
 
     @BeforeEach
     void setUp() {
         primeCalculatorService = new PrimeCalculatorService();
     }
-
 
     @ParameterizedTest
     @MethodSource("primeNumbersInputToExpected")

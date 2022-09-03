@@ -1,6 +1,7 @@
-package com.natwest.simplespring.service;
+package com.natwest.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.natwest.service.PrimeCalculatorServiceTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -8,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static com.natwest.simplespring.service.PrimeCalculatorServiceTest.expectedPrimeNumbers;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -16,15 +16,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class PrimeCalculatorServiceIntegrationTest {
+public class PrimeNumberControllerTest {
     @Autowired
     private MockMvc mockMvc;
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
     public void shouldReturnOk() throws Exception {
         String max = "100";
-        String expectedJson = objectMapper.writeValueAsString(expectedPrimeNumbers);
+        String expectedJson = objectMapper.writeValueAsString(PrimeCalculatorServiceTest.expectedPrimeNumbers);
         this.mockMvc.perform(get("/api/v1/primeNumbers?maxValue=" + max)).andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(expectedJson));
